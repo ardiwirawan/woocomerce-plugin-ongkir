@@ -2,8 +2,8 @@
 /*
 Plugin Name: WooCommerce Indonesia Shipping
 Description: WooCommerce FREE Shipping plugin for JNE, TIKI, or POS. Requires purchase from RajaOngkir.
-Plugin URI: http://github.com/hrsetyono/wc-indo-shipping
-Author: The Syne Studio
+Plugin URI: -
+Author: fork form The Syne Studio
 Author URI: http://thesyne.com/
 Version: 1.1.3b
 */
@@ -25,16 +25,19 @@ require_once 'public/all.php';
   Inititate the Indo Shipping method
 */
 new WCIS_Init();
+
 class WCIS_Init {
+
   private $settings;
   private $enabled;
 
   function __construct() {
-    $this->settings = get_option('woocommerce_wcis_settings');
-    $this->enabled = isset($this->settings['enabled']) ? $this->settings['enabled'] : 'no';
+    $this->settings   = get_option('woocommerce_wcis_settings');
+    $this->enabled    = isset($this->settings['enabled']) ? $this->settings['enabled'] : 'no';
 
     if($this->enabled === 'yes') {
       $this->admin_init();
+      $this->waybill_init();
 
       add_action('template_redirect', array($this, 'public_init') );
     }
@@ -43,6 +46,16 @@ class WCIS_Init {
     add_action('woocommerce_shipping_init', array($this, 'shipping_init') );
     add_filter('woocommerce_shipping_methods', array($this, 'shipping_method') );
   }
+
+
+  /* Class Airway Bills */
+  public function waybill_init(){
+
+    // Waybill 
+    new WCIS_Waybill();
+
+  }
+
 
   /*
     Inititate the needed classes
@@ -53,6 +66,7 @@ class WCIS_Init {
   }
 
   function public_init() {
+
     if(is_checkout() ) {
       new WCIS_Frontend();
     }
@@ -82,8 +96,9 @@ class WCIS_Init {
     @filter woocommerce_shipping_methods
   */
   function shipping_method($methods) {
-  	$methods['wcis'] = 'WCIS_Method';
-    $methods['wcis_zone'] = 'WCIS_Zones_Method';
+  	$methods['wcis']          = 'WCIS_Method';
+    $methods['wcis_zone']     = 'WCIS_Zones_Method';
+
   	return $methods;
   }
 }

@@ -3,21 +3,22 @@
   Zone setting for Indo Shipping
 */
 class WCIS_Zones_Method extends WC_Shipping_Method {
+  
   private $api;
   private $main_settings;
 
   public function __construct($instance_id = 0) {
-		$this->id = 'wcis_zone';
-    $this->instance_id = absint($instance_id);
+		$this->id           = 'wcis_zone';
+    $this->instance_id  = absint($instance_id);
 
-    $this->title = __('Indo Shipping', 'wcis');
-		$this->method_title = __('Indo Shipping', 'wcis');
+    $this->title              = __('Indo Shipping', 'wcis');
+		$this->method_title       = __('Indo Shipping', 'wcis');
     $this->method_description = __('Indonesian domestic shipping with JNE, TIKI, or POS', 'wcis');
-    $this->supports = array('shipping-zones', 'instance-settings',);
+    $this->supports           = array('shipping-zones', 'instance-settings',);
 
     // global
-    $this->main_settings = get_option('woocommerce_wcis_settings');
-    $this->api = new WCIS_API($this->main_settings['key']);
+    $this->main_settings      = get_option('woocommerce_wcis_settings');
+    $this->api                = new WCIS_API($this->main_settings['key']);
 
     // allow save setting
     add_action('woocommerce_update_options_shipping_' . $this->id, array( $this, 'process_admin_options' ) );

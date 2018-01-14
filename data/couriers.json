@@ -25,6 +25,18 @@
   }
 },
 
+"pos": {
+  "name": "POS Indonesia",
+  "services": {
+    "Surat Kilat Khusus": {
+      "title": "Surat Kilat Khusus"
+    },
+    "Express Next Day": {
+      "title": "Express Next Day"
+    }
+  }
+},
+
 "tiki": {
   "name": "TIKI",
   "services": {
@@ -46,17 +58,7 @@
   }
 },
 
-"pos": {
-  "name": "POS Indonesia",
-  "services": {
-    "Surat Kilat Khusus": {
-      "title": "Surat Kilat Khusus"
-    },
-    "Express Next Day": {
-      "title": "Express Next Day"
-    }
-  }
-},
+
 "pcp": {
   "name": "PCP",
   "services": {

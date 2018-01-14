@@ -60,6 +60,7 @@ class WCIS_Data {
     @return array - The services this courier provided
   */
   static function get_services($name, $simple_format = false) {
+    
     if($name === 'J&T') { $name = 'jnt'; } // for weird reason, the response code for 'jnt' is 'J&T'
 
     $couriers = self::_get_json_file('couriers.json');

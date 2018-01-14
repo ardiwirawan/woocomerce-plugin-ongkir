@@ -4,8 +4,9 @@ class WCIS_API {
   private $api_key;
   private $api_base = 'http://pro.rajaongkir.com/api';
 
-  const PROVINCE_URL = '/province';
-  const COST_URL = '/cost';
+  const PROVINCE_URL    = '/province';
+  const COST_URL        = '/cost';
+  const WAYBILL_URL     = '/waybill';
 
   function __construct($api_key = '') {
     $this->api_key = ($api_key) ? $api_key : $this->api_key;
@@ -43,6 +44,30 @@ class WCIS_API {
       $costs = $response;
       return $costs;
     } else {
+      return $response;
+    }
+  }
+
+  /* Get Waybill Report */
+  function get_waybill($args){
+
+    $query = http_build_query($args);
+
+    $response = $this->call(self::WAYBILL_URL, array(
+      CURLOPT_CUSTOMREQUEST   => 'POST',
+      CURLOPT_POSTFIELDS      => $query,
+      CURLOPT_HTTPHEADER      => array(
+        'content-type: application/x-www-form-urlencoded',
+        'key: ' . $this->api_key
+      ),
+    ));
+
+    if($response) {
+      $waybill = $response;
+
+      return $waybill;
+    } 
+    else {
       return $response;
     }
   }
