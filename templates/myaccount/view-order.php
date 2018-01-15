@@ -97,7 +97,14 @@ if ( $waybill_num ) :
 				<?php echo $waybill_data['result']['summary']['waybill_number']; ?>
 			</td>
 			<td class="waybill-number">
-				<?php echo $waybill_data['result']['details']['weight'].' Kg'; ?>
+				<?php 
+					if($waybill_data['result']['details']['weight'] != ""){
+						echo $waybill_data['result']['details']['weight'].' Kg';
+					}
+					else{
+						echo "-";
+					}
+				?>
 			</td>
 			<td class="waybill-number">
 				<?php echo format_ind_date($waybill_data['result']['details']['waybill_date']); ?>
